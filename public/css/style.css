@@ -1,0 +1,34 @@
+.body {
+  margin: 0vw 5vw;
+}
+
+#header {
+  font-size: 2em;
+  color: rgb(243, 158, 31);
+  margin-right: 14vw;
+  text-align: right;
+}
+
+#leftContainer {
+  display: flex;
+}
+
+#rightContainer {
+  margin-top: 30vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#descriptions {
+  margin-top: 15vw;
+  margin-left: 1vw;
+}
+
+#jugAnimation {
+  margin-left: 6vw;
+}
+
+#image {
+  display: flex;
+  height: 100%;
+}
