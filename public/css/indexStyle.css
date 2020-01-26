@@ -7,6 +7,8 @@
   color: rgb(243, 158, 31);
   margin-right: 14vw;
   text-align: right;
+  display: flex;
+  justify-content: center;
 }
 
 #leftContainer {
@@ -24,7 +26,7 @@
   margin-left: 1vw;
 }
 
-#jugAnimation {
+#watering-can {
   margin-left: 6vw;
 }
 

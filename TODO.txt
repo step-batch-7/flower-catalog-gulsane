@@ -8,8 +8,17 @@ version[0.1]
     * Add animated jug
     * Add guest book link
 
------------------------------TODO------------------------------
+-----------------------------DONE------------------------------
 
     (2) Create page for link Abeliophyllum
     (3) Create page for link agerantum
     (4) Create page for link Guest Book
+    (5) Add server for the webpage
+
+-----------------------------TODO------------------------------
+
+version[0.2]
+
+    (1) Add download feature for pdf file for flowers detail
+    (2) Add comment post feature for guestBook page
+

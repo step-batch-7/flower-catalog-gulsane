@@ -4,8 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/style.css" />
+    <title>Flower_Catalog</title>
+    <link rel="stylesheet" href="indexStyle.css" />
+    <script>
+      const hideJug = function() {
+        const wateringCan = document.querySelector("#watering-can");
+        wateringCan.style.visibility = "hidden";
+        setTimeout(() => (wateringCan.style.visibility = "visible"), 1000);
+      };
+    </script>
   </head>
   <body class="body">
     <hr />
@@ -13,23 +20,24 @@
     <hr />
     <div id="leftContainer">
       <div id="image">
-        <img src="../jpg/freshorigins.jpg" alt="freshorigins.jpg" />
+        <img src="freshorigins.jpg" alt="freshorigins.jpg" />
       </div>
       <div id="rightContainer">
         <div id="links">
           <ul>
-            <li><a href="https://google.com">Abeliophyllum</a></li>
-            <li><a href="https://google.com">agerantum</a></li>
+            <li><a href="abeliophyllum.html">Abeliophyllum</a></li>
+            <li><a href="agerantum.html">agerantum</a></li>
           </ul>
         </div>
-        <div id="jugAnimation">
+        <div id="watering-can">
           <img
-            src="../gif/animated-flower-image-0021.gif"
+            src="animated-flower-image-0021.gif"
             alt="animated-flower-image-0021.gif"
+            onclick="hideJug()"
           />
         </div>
         <div>
-          <span><a href="https://google.com">Guest Book</a></span>
+          <span><a href="guestBook.html">Guest Book</a></span>
         </div>
       </div>
     </div>
