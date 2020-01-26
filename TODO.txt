@@ -15,7 +15,7 @@ version[0.1]
     (4) Create page for link Guest Book
     (5) Add server for the webpage
 
------------------------------TODO------------------------------
+-----------------------------DONE------------------------------
 
 version[0.2]
 

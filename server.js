@@ -28,6 +28,40 @@ const getResponseObject = function(content, contentType) {
   return res;
 };
 
+const formatComment = function(comment) {
+  const formattedComment = {};
+  formattedComment.guestName = comment.guestName.replace(/\+/g, " ");
+  formattedComment.commentMsg = comment.commentMsg.replace(/\+/g, " ");
+  return formattedComment;
+};
+
+const createTable = function(comments) {
+  let tableHTML = "";
+  comments.forEach(comment => {
+    tableHTML += "<tr>";
+    tableHTML += `<td> ${comment.date} </td>`;
+    tableHTML += `<td> ${comment.guestName} </td>`;
+    tableHTML += `<td> ${comment.commentMsg} </td>`;
+    tableHTML += "</tr>";
+  });
+  return tableHTML;
+};
+
+const serveGuestBook = function(req) {
+  let comments = fs.readFileSync("./userComments.json", "utf8");
+  comments = JSON.parse(comments);
+  if (req.method === "POST") {
+    const comment = formatComment(req.body);
+    comment.date = new Date().toJSON();
+    comments.unshift(comment);
+    fs.writeFileSync("./userComments.json", `${JSON.stringify(comments)}`);
+  }
+  const commentTable = createTable(comments);
+  let content = fs.readFileSync("./public/html/guestBook.html", "utf8");
+  content = content.replace("__comments__", commentTable);
+  return getResponseObject(content, "text/html");
+};
+
 const serveStaticFile = req => {
   const [, extension] = req.url.match(/.*\.(.*)$/) || [];
   const path = `${getStaticFolder(extension)}${req.url}`;
@@ -45,7 +79,9 @@ const findHandler = req => {
     req.url = "/index.html";
     return serveStaticFile;
   }
-
+  if (req.url === "/guestBook.html") {
+    return serveGuestBook;
+  }
   if (req.method === "GET") {
     return serveStaticFile;
   }
