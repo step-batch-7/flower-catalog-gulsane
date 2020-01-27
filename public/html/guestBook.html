@@ -14,12 +14,13 @@
     <div class="commentArea">
       <h2 class="subHeader">Leave a Comment</h2>
       <form action="guestBook.html" method="POST">
-        Name:<input type="text" name="guestName" /><br />
+        Name:<input type="text" name="guestName" required /><br />
         Comment:<textarea
           name="commentMsg"
           id="guest"
           cols="30"
           rows="5"
+          required
         ></textarea
         ><br />
         <input type="submit" value="Submit" class="button" />

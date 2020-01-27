@@ -2,49 +2,16 @@ const { Server } = require("net");
 const fs = require("fs");
 const Request = require("./lib/request.js");
 const Response = require("./lib/response.js");
+const {
+  getResponseObject,
+  formatComment,
+  createTable
+} = require("./lib/utils.js");
+const CONTENT_TYPES = require("./lib/mediaType.js");
 
 const getStaticFolder = extension => {
   const STATIC_FOLDER = `${__dirname}/public/${extension}`;
   return STATIC_FOLDER;
-};
-const CONTENT_TYPES = {
-  txt: "text/plain",
-  html: "text/html",
-  css: "text/css",
-  js: "application/javascript",
-  json: "application/json",
-  gif: "image/gif",
-  jpg: "image/jpeg",
-  jpeg: "image/jpeg",
-  pdf: "application/pdf"
-};
-
-const getResponseObject = function(content, contentType) {
-  const res = new Response();
-  res.setHeader("Content-Type", contentType);
-  res.setHeader("Content-Length", content.length);
-  res.statusCode = 200;
-  res.body = content;
-  return res;
-};
-
-const formatComment = function(comment) {
-  const formattedComment = {};
-  formattedComment.guestName = comment.guestName.replace(/\+/g, " ");
-  formattedComment.commentMsg = comment.commentMsg.replace(/\+/g, " ");
-  return formattedComment;
-};
-
-const createTable = function(comments) {
-  let tableHTML = "";
-  comments.forEach(comment => {
-    tableHTML += "<tr>";
-    tableHTML += `<td> ${comment.date} </td>`;
-    tableHTML += `<td> ${comment.guestName} </td>`;
-    tableHTML += `<td> ${comment.commentMsg} </td>`;
-    tableHTML += "</tr>";
-  });
-  return tableHTML;
 };
 
 const serveGuestBook = function(req) {
