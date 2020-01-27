@@ -9,8 +9,8 @@ const {
 } = require("./lib/utils.js");
 const CONTENT_TYPES = require("./lib/mediaType.js");
 
-const getStaticFolder = extension => {
-  const STATIC_FOLDER = `${__dirname}/public/${extension}`;
+const getStaticFolder = () => {
+  const STATIC_FOLDER = `${__dirname}/public`;
   return STATIC_FOLDER;
 };
 
@@ -24,14 +24,14 @@ const serveGuestBook = function(req) {
     fs.writeFileSync("./userComments.json", `${JSON.stringify(comments)}`);
   }
   const commentTable = createTable(comments);
-  let content = fs.readFileSync("./public/html/guestBook.html", "utf8");
+  let content = fs.readFileSync("./public/guestBook.html", "utf8");
   content = content.replace("__comments__", commentTable);
   return getResponseObject(content, "text/html");
 };
 
 const serveStaticFile = url => {
   const [, extension] = url.match(/.*\.(.*)$/) || [];
-  const path = `${getStaticFolder(extension)}${url}`;
+  const path = `${getStaticFolder()}${url}`;
   const stat = fs.existsSync(path) && fs.statSync(path);
   if (!stat || !stat.isFile()) {
     return new Response();
