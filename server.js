@@ -29,9 +29,9 @@ const serveGuestBook = function(req) {
   return getResponseObject(content, "text/html");
 };
 
-const serveStaticFile = req => {
-  const [, extension] = req.url.match(/.*\.(.*)$/) || [];
-  const path = `${getStaticFolder(extension)}${req.url}`;
+const serveStaticFile = url => {
+  const [, extension] = url.match(/.*\.(.*)$/) || [];
+  const path = `${getStaticFolder(extension)}${url}`;
   const stat = fs.existsSync(path) && fs.statSync(path);
   if (!stat || !stat.isFile()) {
     return new Response();
@@ -43,14 +43,13 @@ const serveStaticFile = req => {
 
 const findHandler = req => {
   if (req.method === "GET" && req.url === "/") {
-    req.url = "/index.html";
-    return serveStaticFile;
+    return () => serveStaticFile("/index.html");
   }
   if (req.url === "/guestBook.html") {
     return serveGuestBook;
   }
   if (req.method === "GET") {
-    return serveStaticFile;
+    return () => serveStaticFile(req.url);
   }
   return () => new Response();
 };
