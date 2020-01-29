@@ -1,9 +1,11 @@
 const { Server } = require("http");
-const { handleRequest } = require("./app.js");
+const { methods } = require("./lib/handlers.js");
 
 const handleConnection = function(req, res) {
   console.log(req.url, req.method);
-  handleRequest(req, res);
+  const handlers = methods[req.method] || methods.NOT_ALLOWED;
+  const handler = handlers[req.url] || handlers.defaultHandler;
+  return handler(req, res);
 };
 
 const main = (port = 4000) => {
