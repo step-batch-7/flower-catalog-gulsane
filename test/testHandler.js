@@ -55,6 +55,15 @@ describe('GET', () => {
   });
 });
 
+describe('POST', () => {
+  it('should return status code 404 if file is not present', done => {
+    request(app.serve.bind(app))
+      .get('/badFile')
+      .set('accept', '*/*')
+      .expect(404, done);
+  });
+});
+
 describe('ANY METHOD OTHER THAN GET AND POST', () => {
   it('should return the that method is not allowed', done => {
     request(app.serve.bind(app))
