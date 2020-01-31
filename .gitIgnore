@@ -1,3 +1,5 @@
 .DS_Store
 .vscode/
 userComments.json
+.nyc_output
+node_modules

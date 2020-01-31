@@ -31,3 +31,7 @@ version[0.2]
   (2) have modify the special characters in html format while 
       writing on the response
   (3) have to set the Content-type of while writing on response
+  (4) have to return the status code 404 for <present page>/<bad file>
+      the error is at the matching in handlers in App and not validating
+      the file while responding to the request
+  (5) have to remove the if condition from the next function of App
