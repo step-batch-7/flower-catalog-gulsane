@@ -58,9 +58,17 @@ describe('GET', () => {
 describe('POST', () => {
   it('should return status code 404 if file is not present', done => {
     request(app.serve.bind(app))
-      .get('/badFile')
+      .post('/badFile')
       .set('accept', '*/*')
-      .expect(404, done);
+      .expect(400, done);
+  });
+  it('should post the comment', done => {
+    request(app.serve.bind(app))
+      .post('/comment')
+      .send('name=gulshan&commentMsg=hello')
+      .set('accept', '*/*')
+      .expect(303)
+      .expect('location', '/guestBook.html', done);
   });
 });
 
